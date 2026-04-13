@@ -1,2 +1,2 @@
 # jmantillap.github.io
-repositorio, mapa infraestructura SETI
+pagina prueba
