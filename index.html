@@ -1,21 +1,708 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Javier Mantilla</title>
-    <meta name="description" content="Welcome to the personal site of Javier Mantilla.">
-    <link rel="stylesheet" href="style.css">
+    <title>Javier Mantilla - Desarrollador Full Stack</title>
+    <meta name="description" content="Portafolio de proyectos de Javier Mantilla - Desarrollador Full Stack especializado en Java, Spring Boot, Go, AWS y arquitecturas modernas">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #0366d6;
+            --secondary-color: #28a745;
+            --dark-bg: #0d1117;
+            --card-bg: #161b22;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --border-color: #30363d;
+            --accent-java: #b07219;
+            --accent-go: #00ADD8;
+            --accent-ts: #3178c6;
+            --accent-python: #3776ab;
+            --accent-js: #f7df1e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: rgba(22, 27, 34, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f2e 100%);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .tech-badge {
+            padding: 0.5rem 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Stats Section */
+        .stats {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: var(--text-secondary);
+        }
+
+        /* Projects Section */
+        .projects {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(3, 102, 214, 0.2);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            font-size: 1.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .language-tag {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .lang-Java { background: rgba(176, 114, 25, 0.2); color: var(--accent-java); }
+        .lang-Go { background: rgba(0, 173, 216, 0.2); color: var(--accent-go); }
+        .lang-TypeScript { background: rgba(49, 120, 198, 0.2); color: var(--accent-ts); }
+        .lang-Python { background: rgba(55, 118, 171, 0.2); color: var(--accent-python); }
+        .lang-JavaScript { background: rgba(247, 223, 30, 0.2); color: var(--accent-js); }
+        .lang-PHP { background: rgba(119, 123, 180, 0.2); color: #777bb3; }
+        .lang-Astro { background: rgba(255, 90, 31, 0.2); color: #ff5a1f; }
+
+        .project-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .project-link:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <h1>Welcome to Javier Mantilla's Personal Website</h1>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-code"></i> jmantillap
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
-    <main>
-        <p>This is a placeholder for the main content.</p>
-    </main>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content fade-in">
+            <h1>Javier Mantilla</h1>
+            <p class="subtitle">Desarrollador Full Stack | Arquitecto de Software</p>
+            <div class="tech-stack">
+                <span class="tech-badge"><i class="fab fa-java"></i> Java & Spring Boot</span>
+                <span class="tech-badge"><i class="fab fa-golang"></i> Go</span>
+                <span class="tech-badge"><i class="fab fa-aws"></i> AWS</span>
+                <span class="tech-badge"><i class="fab fa-docker"></i> Docker</span>
+                <span class="tech-badge"><i class="fas fa-project-diagram"></i> Microservicios</span>
+                <span class="tech-badge"><i class="fas fa-layer-group"></i> Arquitectura Hexagonal</span>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/jmantillap" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/jmantillap" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat-card fade-in">
+            <i class="fas fa-code"></i>
+            <h3>65+</h3>
+            <p>Repositorios Públicos</p>
+        </div>
+        <div class="stat-card fade-in">
+            <i class="fas fa-server"></i>
+            <h3>30+</h3>
+            <p>Proyectos Spring Boot</p>
+        </div>
+        <div class="stat-card fade-in">
+            <i class="fab fa-golang"></i>
+            <h3>15+</h3>
+            <p>Proyectos Go</p>
+        </div>
+        <div class="stat-card fade-in">
+            <i class="fab fa-aws"></i>
+            <h3>10+</h3>
+            <p>Proyectos AWS</p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2 class="section-title">Proyectos Destacados</h2>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="Java">Java</button>
+            <button class="filter-btn" data-filter="Go">Go</button>
+            <button class="filter-btn" data-filter="TypeScript">TypeScript</button>
+            <button class="filter-btn" data-filter="AWS">AWS</button>
+            <button class="filter-btn" data-filter="WebFlux">WebFlux</button>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid"></div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        &copy; 2026 Javier Mantilla. All rights reserved.
+        <p>&copy; 2026 Javier Mantilla. Desarrollador Full Stack apasionado por crear soluciones escalables.</p>
+        <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+            <i class="fas fa-heart" style="color: #e74c3c;"></i> Creado con GitHub Pages
+        </p>
     </footer>
+
+    <script>
+        // Proyectos data
+        const projects = [
+            {
+                name: "demo-proyect-aws",
+                description: "Proyecto para desplegar en AWS con CloudFormation, front y back. AWS DynamoDB, ECS Fargate, S3, ALB, IAM, ECR",
+                language: "Java",
+                url: "https://github.com/jmantillap/demo-proyect-aws",
+                tags: ["AWS", "CloudFormation", "DynamoDB", "ECS"]
+            },
+            {
+                name: "example-bancolombia",
+                description: "Proyecto basado en el Scaffolding of Clean Architecture de Bancolombia, REST con MongoDB. Arquitectura Hexagonal",
+                language: "Java",
+                url: "https://github.com/jmantillap/example-bancolombia",
+                tags: ["Hexagonal", "MongoDB", "Clean Architecture"]
+            },
+            {
+                name: "spring-demo-franquicia-hexagonal",
+                description: "Migración de proyecto spring-demo-franquicia a arquitectura Hexagonal",
+                language: "Java",
+                url: "https://github.com/jmantillap/spring-demo-franquicia-hexagonal",
+                tags: ["Hexagonal", "Spring Boot"]
+            },
+            {
+                name: "taxes-demo-webflux",
+                description: "Proyecto arquitectura hexagonal, reactivo, y conexión a colas RabbitMQ",
+                language: "Java",
+                url: "https://github.com/jmantillap/taxes-demo-webflux",
+                tags: ["WebFlux", "Hexagonal", "RabbitMQ"]
+            },
+            {
+                name: "webflux-post-hexagonal",
+                description: "Proyecto programación reactiva Spring, arquitectura hexagonal y MongoDB",
+                language: "Java",
+                url: "https://github.com/jmantillap/webflux-post-hexagonal",
+                tags: ["WebFlux", "Hexagonal", "MongoDB"]
+            },
+            {
+                name: "curso-webflux-kafka",
+                description: "Curso Microservicios y aplicaciones reactivas con WebFlux y Kafka",
+                language: "Java",
+                url: "https://github.com/jmantillap/curso-webflux-kafka",
+                tags: ["WebFlux", "Kafka", "Microservices"]
+            },
+            {
+                name: "mvc-webflux-performace",
+                description: "Prueba de concepto para comparación del mismo proyecto realizado en Spring MVC y WebFlux serie fibonacci",
+                language: "Java",
+                url: "https://github.com/jmantillap/mvc-webflux-performace",
+                tags: ["WebFlux", "Performance", "MVC"]
+            },
+            {
+                name: "spring-boot-jwt-rotation",
+                description: "Validación de JWT y Rotación de token",
+                language: "Java",
+                url: "https://github.com/jmantillap/spring-boot-jwt-rotation",
+                tags: ["JWT", "Security", "Spring Boot"]
+            },
+            {
+                name: "spring-aws-s3",
+                description: "Proyecto para ejecutar Select S3 en una lista de objetos JSON, de un prefijo en un bucket, con llaves STS y token Session",
+                language: "Java",
+                url: "https://github.com/jmantillap/spring-aws-s3",
+                tags: ["AWS", "S3", "STS"]
+            },
+            {
+                name: "spring-rabbitmq-example",
+                description: "Proyecto Spring Boot base para enviar y recibir mensajes de RabbitMQ",
+                language: "Java",
+                url: "https://github.com/jmantillap/spring-rabbitmq-example",
+                tags: ["RabbitMQ", "Messaging"]
+            },
+            {
+                name: "springboot-aws-sqs-pub-sub",
+                description: "Publicar y suscribirse a una cola SQS",
+                language: "Java",
+                url: "https://github.com/jmantillap/springboot-aws-sqs-pub-sub",
+                tags: ["AWS", "SQS", "Messaging"]
+            },
+            {
+                name: "springboot-sqs-jms",
+                description: "Proyecto para poder leer mensajes de una cola SQS a través de JMS",
+                language: "Java",
+                url: "https://github.com/jmantillap/springboot-sqs-jms",
+                tags: ["AWS", "SQS", "JMS"]
+            },
+            {
+                name: "lambda-aws-apigateway",
+                description: "Proyecto Lambda que es invocado desde un API Gateway y esta Lambda invoca otra Lambda",
+                language: "Java",
+                url: "https://github.com/jmantillap/lambda-aws-apigateway",
+                tags: ["AWS", "Lambda", "API Gateway"]
+            },
+            {
+                name: "serverless-framework-curso",
+                description: "Curso de Serverless en Español con AWS y Serverless Framework Udemy",
+                language: "JavaScript",
+                url: "https://github.com/jmantillap/serverless-framework-curso",
+                tags: ["AWS", "Serverless", "Lambda"]
+            },
+            {
+                name: "roles-anywhere-aws",
+                description: "Prueba de concepto para conectarnos a AWS a través de roles AnyWhere",
+                language: "Java",
+                url: "https://github.com/jmantillap/roles-anywhere-aws",
+                tags: ["AWS", "IAM", "Security"]
+            },
+            {
+                name: "demo-api-gateway",
+                description: "API Gateway con Spring Cloud",
+                language: "Java",
+                url: "https://github.com/jmantillap/demo-api-gateway",
+                tags: ["Spring Cloud", "Gateway", "Microservices"]
+            },
+            {
+                name: "demo-spring-batch",
+                description: "Ejemplo Básico de Spring Batch",
+                language: "Java",
+                url: "https://github.com/jmantillap/demo-spring-batch",
+                tags: ["Spring Batch", "ETL"]
+            },
+            {
+                name: "curso-go-eventos-cqrs",
+                description: "Curso de eventos y CQRS con Go",
+                language: "Go",
+                url: "https://github.com/jmantillap/curso-go-eventos-cqrs",
+                tags: ["CQRS", "Event Sourcing", "Architecture"]
+            },
+            {
+                name: "curso-go-rest-websockets",
+                description: "Curso de REST y WebSockets con Go",
+                language: "Go",
+                url: "https://github.com/jmantillap/curso-go-rest-websockets",
+                tags: ["REST", "WebSockets", "Real-time"]
+            },
+            {
+                name: "hexagonal-archichecture-example",
+                description: "Ejemplo de Arquitectura Hexagonal con Go",
+                language: "Go",
+                url: "https://github.com/jmantillap/hexagonal-archichecture-example",
+                tags: ["Hexagonal", "Clean Architecture"]
+            },
+            {
+                name: "golang-concurrency",
+                description: "Ejemplos de concurrencia en Go",
+                language: "Go",
+                url: "https://github.com/jmantillap/golang-concurrency",
+                tags: ["Concurrency", "Goroutines"]
+            },
+            {
+                name: "golang-patterns",
+                description: "Patrones de diseño en Go",
+                language: "Go",
+                url: "https://github.com/jmantillap/golang-patterns",
+                tags: ["Design Patterns", "Best Practices"]
+            },
+            {
+                name: "kafka-examples-golang",
+                description: "Ejemplos de Kafka con Go",
+                language: "Go",
+                url: "https://github.com/jmantillap/kafka-examples-golang",
+                tags: ["Kafka", "Messaging"]
+            },
+            {
+                name: "go-advanced-protobuffers-grpc",
+                description: "Protobuffers y gRPC avanzado con Go",
+                language: "Go",
+                url: "https://github.com/jmantillap/go-advanced-protobuffers-grpc",
+                tags: ["gRPC", "Protobuf", "Microservices"]
+            },
+            {
+                name: "angular-crud",
+                description: "Proyecto Diplomado Comfenalco - CRUD con Angular",
+                language: "TypeScript",
+                url: "https://github.com/jmantillap/angular-crud",
+                tags: ["Angular", "CRUD", "Frontend"]
+            },
+            {
+                name: "spotify-app",
+                description: "Aplicación de Spotify - Proyecto Diplomado Comfenalco",
+                language: "TypeScript",
+                url: "https://github.com/jmantillap/spotify-app",
+                tags: ["Angular", "API Integration"]
+            },
+            {
+                name: "proyecto-heroes",
+                description: "Proyecto curso Angular Comfenalco",
+                language: "TypeScript",
+                url: "https://github.com/jmantillap/proyecto-heroes",
+                tags: ["Angular", "SPA"]
+            },
+            {
+                name: "bienestar-financiero-page",
+                description: "Página de bienestar financiero",
+                language: "JavaScript",
+                url: "https://github.com/jmantillap/bienestar-financiero-page",
+                tags: ["Frontend", "Web"]
+            },
+            {
+                name: "codePy",
+                description: "Código Python de diferentes funcionalidades",
+                language: "Python",
+                url: "https://github.com/jmantillap/codePy",
+                tags: ["Python", "Utilities"]
+            },
+            {
+                name: "utility-xforce",
+                description: "Proyecto que tiene Azure comunicación hacia Microsoft 365 y listas de SharePoint",
+                language: "Java",
+                url: "https://github.com/jmantillap/utility-xforce",
+                tags: ["Azure", "Microsoft 365", "SharePoint"]
+            },
+            {
+                name: "github-actions-demo",
+                description: "Demostración de GitHub Actions",
+                language: "Java",
+                url: "https://github.com/jmantillap/github-actions-demo",
+                tags: ["CI/CD", "GitHub Actions"]
+            }
+        ];
+
+        // Render projects
+        function renderProjects(filter = 'all') {
+            const grid = document.getElementById('projectsGrid');
+            const filteredProjects = filter === 'all' 
+                ? projects 
+                : projects.filter(p => 
+                    p.language === filter || 
+                    p.tags.includes(filter)
+                  );
+
+            grid.innerHTML = filteredProjects.map(project => `
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <i class="fas fa-folder-open project-icon" style="color: var(--primary-color);"></i>
+                        <h3>${project.name}</h3>
+                    </div>
+                    <p>${project.description || 'Proyecto de desarrollo'}</p>
+                    <div class="project-footer">
+                        ${project.language ? `<span class="language-tag lang-${project.language}">${project.language}</span>` : ''}
+                        <a href="${project.url}" target="_blank" class="project-link">
+                            Ver código <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderProjects(btn.dataset.filter);
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Initial render
+        renderProjects();
+    </script>
 </body>
 </html>
